@@ -44,48 +44,48 @@ function Navbar() {
     const handleSubmit = async (e) => {
         e.preventDefault();
         try {
-            if (isSignIn) {
-                if (!username || !password) {
-                    setErrorMessage("Please fill in all fields");
-                    return;
-                }
-            } else {
-                if (!username || !password || !confirmPassword) {
-                    setErrorMessage("Please fill in all fields");
-                    return;
-                }
-                if (password !== confirmPassword) {
-                    setErrorMessage("Passwords do not match");
-                    return;
-                }
-                if (password.length < 8) {
-                    setErrorMessage("Password must be at least 8 characters long");
-                    return;
-                }
-            }
-
+            // Your existing code for form submission goes here
             const response = isSignIn
-                ? await axios.post("http://localhost:8080/users/signin", { username, password })
-                : await axios.post("http://localhost:8080/users/signup", { username, password });
+                ? await axios.post("http://localhost:8080/users/signin", { username, password }, {
+                    headers: {
+                        "Access-Control-Allow-Origin": "http://localhost:3000",
+                    }
+                })
+                : await axios.post("http://localhost:8080/users/signup", { username, password }, {
+                    headers: {
+                        "Access-Control-Allow-Origin": "http://localhost:3000",
+                    }
+                });
 
-            const token = response.data.token;
+            const token = response.data.token; // Extract token from response
+
+            // After successful authentication, store the token in local storage
             localStorage.setItem("token", token);
+
+            // Update logged in user state
             setLoggedInUser(username);
+
+            // Clear form fields and error message
             setShowModal(false);
             setUsername("");
             setPassword("");
             setConfirmPassword("");
-            setErrorMessage(""); // Clear any previous error messages
+            setErrorMessage("");
         } catch (error) {
-            console.error("Authentication failed:", error.response.data);
-            setErrorMessage(error.response.data.message); // Set the error message
+            console.error("Authentication failed:", error.response?.data);
+            // Set error message
+            if (error.response && error.response.data && error.response.data.message) {
+                setErrorMessage(error.response.data.message);
+            } else {
+                setErrorMessage("An unknown error occurred");
+            }
         }
     };
 
     const handleLogout = async () => {
         try {
-            localStorage.removeItem("token");
-            setLoggedInUser(null);
+            localStorage.removeItem("token"); // Remove token from local storage
+            setLoggedInUser(null); // Update state to reflect logout
         } catch (error) {
             console.error("Logout failed:", error);
         }
