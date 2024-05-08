@@ -1,0 +1,35 @@
+package com.mydiary.Diaries.Model;
+
+import org.junit.jupiter.api.Test;
+import org.springframework.boot.test.context.SpringBootTest;
+
+import java.time.LocalDateTime;
+
+import static org.junit.jupiter.api.Assertions.assertEquals;
+
+@SpringBootTest
+public class DiaryTest {
+    @Test
+    void contextLoads() {
+    }
+
+    @Test
+    public void testRepository() {
+        // Création d'un nouvel objet Diary
+        Diary diary = new Diary("Test Title", LocalDateTime.now(), "Test Content", 1);
+
+        // Vérification des valeurs attribuées
+        assertEquals("Test Title", diary.getTitle());
+        assertEquals("Test Content", diary.getContent());
+        assertEquals(1, diary.getUser_id());
+
+        // Modification des valeurs et vérification
+        diary.setTitle("Updated Title");
+        diary.setContent("Updated Content");
+        diary.setUser_id(2);
+
+        assertEquals("Updated Title", diary.getTitle());
+        assertEquals("Updated Content", diary.getContent());
+        assertEquals(2, diary.getUser_id());
+    }
+}
