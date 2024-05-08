@@ -1,55 +1,116 @@
-.journal-page {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  padding: 40px;
-  gap: 20px;
+.journal-hero-container {
+  position: relative;
+  background-color: #f5f5f5;
+  padding: 120px;
+  text-align: center;
+  width: 80%; /* Adjust the width as needed */
+  margin: 0 auto; /* Center the hero container horizontally */
+  border-radius: 20px; /* Rounded corners */
+  transition: transform 0.2s ease;
+  box-shadow: 0px 6px 12px rgba(0, 0, 0, 0.1); /* Light shadow */
 }
 
-.greeting {
-  font-size: 36px;
+/* Optional: Adjust the width of the content */
+.journal-hero-content {
+  max-width: 1000px; /* Adjust the maximum width as needed */
+  margin: 0 auto; /* Center the content horizontally */
+}
+
+/* Optional: Adjust the size of the hero title */
+.journal-hero-title {
+  font-size: 48px; /* Adjust the font size as needed */
   font-weight: bold;
-  color: #68283d; /* Dark purple */
-  text-align: center;
+  color: #13070c; /* Light purple */
   margin-bottom: 20px;
 }
 
-.add-entry-btn {
+/* Optional: Adjust the size of the hero description */
+.journal-hero-description {
+  font-size: 24px; /* Adjust the font size as needed */
+  color: #D1B3BC; /* Light pink */
+  margin-bottom: 20px;
+  cursor: pointer;
+}
+
+
+.journal-hero-buttons {
+  display: flex;
+  justify-content: center;
+  gap: 20px;
+}
+
+.journal-hero-button {
   padding: 12px 24px;
-  background-color: #AD8291; /* Dark brown */
+  background-color: #AD8291; /* Light mauve */
   color: white;
   border: none;
   border-radius: 50px;
   cursor: pointer;
-  font-size: 18px;
+  font-size: 16px;
   transition: background-color 0.3s ease;
 }
 
-.add-entry-btn:hover {
-  background-color: #AD8291; /* Light red */
+.journal-hero-button:hover {
+  background-color: #9F6074; /* Light pink */
+  
 }
 
-/* Modal styles */
-.modal-wrapper {
+.journal-hero-image-container {
+  flex: 1;
+  text-align: center; /* Center the image */
+}
+
+.journal-hero-image {
+  max-width: 100%;
+  border-radius: 10px; /* Rounded corners for the image */
+}
+
+.journal-scroll-up {
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  background-color: #AD8291; /* Light green */
+  color: white;
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 24px;
+  cursor: pointer;
+  transition: opacity 0.3s ease;
+  opacity: 0;
+  z-index: 9999; /* Ensure it appears above other content */
+}
+
+.journal-scroll-up.show-scroll {
+  opacity: 1;
+}
+
+/* Styles for modal */
+.modal-overlay {
   position: fixed;
   top: 0;
   left: 0;
   width: 100%;
   height: 100%;
+  background-color: rgba(0, 0, 0, 0.5);
   display: flex;
   justify-content: center;
   align-items: center;
-  z-index: 9999;
-  background-color: rgba(0, 0, 0, 0.5); /* Semi-transparent background */
+  z-index: 9999; /* Ensure modal appears in front of everything */
 }
 
 .modal {
   background-color: white;
-  padding: 40px;
-  border-radius: 20px;
-  max-width: 600px;
-  text-align: center;
-  box-shadow: 0px 6px 12px rgba(0, 0, 0, 0.1);
+  padding: 20px;
+  border-radius: 8px;
+  z-index: 10000; /* Ensure modal appears in front of overlay */
+  width: 100%; /* Adjust width as needed */
+  max-height: 90%; /* Adjust height as needed */
+  overflow-y: auto; /* Enable scrolling if content exceeds max height */
+  max-width: 70%;
 }
 
 .close {
@@ -57,192 +118,76 @@
   top: 10px;
   right: 10px;
   cursor: pointer;
-  font-size: 24px;
-  color: #AD8291; /* Light red */
 }
 
-.modal-content h2 {
-  font-size: 24px;
-  font-weight: bold;
-  color: #9f6074; /* Dark pink */
-  margin-bottom: 20px;
+.modal h2 {
+  text-align: center;
+  font-size: 28px; /* Adjust title size */
+  margin-bottom: 15px; /* Adjust margin for title */
 }
 
-.modal-content input[type="text"] {
+.modal label {
+  display: block;
+  margin-bottom: 10px;
+  font-size: 16px; /* Adjust label size */
+}
+
+.modal input[type="date"] {
+  display: block;
+  margin-bottom: 10px;
   width: 100%;
-  padding: 12px;
-  margin-bottom: 20px;
-  border: none;
-  border-radius: 10px;
-  font-size: 18px;
-  outline: none;
+  font-size: 16px; /* Adjust date size */
 }
 
-.journal-textarea {
-  width: 70%;
-  margin-right: 12px;
-  min-height: 150px;
-  width: 514px;
-  height: 382px;
-  padding: 12px;
-  border: 1px solid #ccc;
-  border-radius: 10px;
-  font-size: 16px;
+
+.modal input[type="text"] {
+  display: block;
+  margin-bottom: 10px;
+  width: 100%;
+  font-size: 20px; /* Adjust content size */
+  height: 30px; /* Adjust height as needed */
+  resize: vertical; /* Allow vertical resizing if content exceeds height */
+}
+.modal textarea{
+  display: block;
+  margin-bottom: 10px;
+  width: 100%;
+  font-size: 20px; /* Adjust content size */
+  height: 300px; /* Adjust height as needed */
+  resize: vertical; /* Allow vertical resizing if content exceeds height */
 }
 
-.date-container {
+.modal button {
+  display: block;
+  margin: 20px auto 0;
+  font-size: 20px; /* Adjust button size */
+}
+.diaries-list {
   margin-top: 20px;
 }
 
-.date-container p {
-  font-size: 16px;
-  color: #333;
+.diaries-list h2 {
+  font-size: 1.5rem;
+  margin-bottom: 10px;
 }
 
-.journal-entries {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: center;
-  gap: 20px;
-  flex-direction: row; /* Updated to horizontal layout */
+.diaries-list ul {
+  list-style-type: none;
+  padding: 0;
 }
 
-.entry-item {
-  position: relative;
-  background-color: #f5f5f5; /* Light gray */
-  border-radius: 20px;
-  box-shadow: 0px 6px 12px rgba(0, 0, 0, 0.1);
-  width: 800px; /* Default width */
-  height: 175px;
+.diaries-list li {
+  border: 2px solid #ff69b4; /* Pink border */
+  box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1); /* Shadow effect */
   padding: 20px;
   margin-bottom: 20px;
-  cursor: pointer;
-  transition: transform 0.2s ease, opacity 1s ease; /* Apply transitions for transform and opacity */
-  overflow: hidden;
-  border: 1px solid #ccc;
 }
 
-/* Responsive styles */
-@media screen and (max-width: 768px) {
-  .journal-entries {
-    justify-content: flex-start; /* Adjust alignment for smaller screens */
-  }
-
-  .entry-item {
-    width: calc(50% - 20px); /* Two notes per row on smaller screens */
-  }
+.diaries-list .diary-date {
+  font-size: 0.8rem;
+  color: #666;
 }
 
-@media screen and (max-width: 480px) {
-  .entry-item {
-    width: calc(100% - 20px); /* Single note per row on even smaller screens */
-  }
+.diaries-list .diary-content {
+  font-size: 1rem;
 }
-
-.entry-item:hover {
-  transform: translateY(-5px);
-}
-
-.pin-icon {
-  position: absolute;
-  top: 5px;
-  right: 5px;
-  color: #AD8291; /* Light red */
-  font-size: 24px;
-  cursor: pointer;
-}
-
-.entry-content {
-  overflow: visible;
-}
-
-.entry-actions {
-  display: none; /* Hide the buttons by default */
-}
-
-.entry-item.active .entry-actions {
-  display: flex; /* Show the buttons when the note is active */
-  justify-content: space-between;
-  position: absolute;
-  bottom: 10px; /* Adjust the position of the buttons */
-  left: 50%; /* Center the buttons horizontally */
-  transform: translateX(-50%);
-  width: 80%; /* Limit button width to 80% of note */
-}
-
-.entry-actions button {
-  padding: 8px 16px;
-  background-color: #AD8291; /* Light red */
-  color: white;
-  border: none;
-  border-radius: 10px;
-  cursor: pointer;
-  font-size: 16px;
-  transition: background-color 0.3s ease;
-}
-
-.entry-actions button:hover {
-  background-color: #93647a; /* Darker red */
-}
-
-/* Entry header styles */
-.entry-header {
-  display: flex;
-  align-items: center;
-  margin-bottom: 10px;
-}
-
-/* Calendar icon styles */
-.calendar-icon {
-  font-size: 24px;
-  margin-right: 10px;
-  color: #93647a;
-}
-
-/* Entry date styles */
-.entry-date {
-  font-size: 16px;
-  font-weight: bold;
-  margin: 0;
-  color: #93647a;
-}
-
-/* Entry title styles */
-.entry-title {
-  font-size: 20px;
-  margin: 0;
-  margin-bottom: 10px;
-}
-
-.tips-modal-content {
-  padding: 20px;
-  text-align: center;
-}
-
-.tips-modal-content h2 {
-  font-size: 24px;
-  margin-bottom: 10px;
-}
-
-.tips-modal-content p {
-  font-size: 18px;
-  margin-bottom: 20px;
-}
-
-.tips-modal-content ul {
-  text-align: left;
-  padding-left: 20px;
-}
-
-.tips-modal-content li {
-  font-size: 16px;
-  margin-bottom: 10px;
-}
-
-
-
-
-
-
-
-

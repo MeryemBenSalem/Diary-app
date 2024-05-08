@@ -3,8 +3,6 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faArrowAltCircleRight } from "@fortawesome/free-solid-svg-icons";
 import "../Styles/JournalHero.css";
 import Navbar from "./Navbar";
-import image from "../Assets/journal.png";
-
 
 function JournalHero({ onAddClick, onViewClick, image }) {
     const [goUp, setGoUp] = useState(false);

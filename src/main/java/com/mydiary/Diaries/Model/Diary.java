@@ -2,7 +2,6 @@ package com.mydiary.Diaries.Model;
 
 
 import java.time.LocalDateTime;
-
 import jakarta.persistence.Id;
 import org.bson.types.ObjectId;
 import org.springframework.data.mongodb.core.mapping.Document;
